@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Xamarin.Essentials;
+using Xamarin.Forms.Internals;
+using System;
+using BetterGeolocator;
+using System.Collections.Generic;
 
 namespace XamMap
 {
     public class PinPage : ContentPage
     {
-        Map map;
+        Xamarin.Forms.Maps.Map map;
 
         public PinPage()
         {
-            map = new Map
+            map = new Xamarin.Forms.Maps.Map
             {
                 IsShowingUser = true,
                 HeightRequest = 100,
@@ -21,54 +23,69 @@ namespace XamMap
             };
 
             map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                new Position(36.9628066, -122.0194722), Distance.FromMiles(3)));
-            var position = new Position(36.9628066, -122.0194722);
-            var pin = new Pin
+                new Position(59.939042, 30.315799), Distance.FromMiles(3)));
+            map.MapClicked += (sender, e) =>
             {
-                Type = PinType.Place,
-                Position = position,
-                Label = "Santa Cruz",
-                Address = "custom detail info"
-            };
-            map.Pins.Add(pin);
-
-
-
-            var morePins = new Button { Text = "Add more pins" };
-            morePins.Clicked += (sender, e) => {
                 map.Pins.Add(new Pin
                 {
-                    Position = new Position(36.9641949, -122.0177232),
-                    Label = "Boardwalk"
+                    Position = new Position(e.Position.Latitude,e.Position.Longitude),
+                    Label = "Marker"
                 });
-                map.Pins.Add(new Pin
-                {
-                    Position = new Position(36.9571571, -122.0173544),
-                    Label = "Wharf"
-                });
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                    new Position(36.9628066, -122.0194722), Distance.FromMiles(1.5)));
-
             };
-            var reLocate = new Button { Text = "Re-center" };
-            reLocate.Clicked += (sender, e) => {
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(
-                    new Position(36.9628066, -122.0194722), Distance.FromMiles(3)));
-            };
-            var buttons = new StackLayout
+            var CheckDistance = new Button { Text = "Calculate distance" };
+            CheckDistance.Clicked += (sender, e) =>
             {
-                Orientation = StackOrientation.Horizontal,
-                Children = {
-                    morePins, reLocate
+                var locator = new Geolocator();
+                async void GetLocation()
+                {
+                    var loc = await locator.GetLocation(TimeSpan.FromSeconds(30), 200);
+                    var userLat = loc.Coordinate.Latitude;
+                    var userLong = loc.Coordinate.Longitude;
+                    foreach (var pin in map.Pins)
+                    {
+                        double distance = Location.CalculateDistance(pin.Position.Latitude, pin.Position.Longitude, userLat, userLong, DistanceUnits.Kilometers);
+                        if (distance < 2)
+                        {
+                            async void SendMail()
+                            {
+                                var Entry = new Entry { Text = "Enter your email" };
+                                List<string> to = new List<string>();
+                                to.Add(Entry.Text);
+                                var message = new EmailMessage
+                                {
+                                    Subject = "Point",
+                                    Body = "User coordinates - " + userLat + " " + userLong
+                                    + "\n" + "Point coordinates - " + pin.Position.Latitude + " " + pin.Position.Longitude,
+                                    To = to
+                                };
+                                await Email.ComposeAsync(message);
+
+                            }
+                            SendMail();
+                        }
+                    }
+
                 }
+
+                GetLocation();
             };
+
+            var delPins = new Button { Text = "Delete pins" };
+            delPins.Clicked += (sender, e) => {
+                map.Pins.Clear();
+
+            };
+            
+
+           
 
             Content = new StackLayout
             {
                 Spacing = 0,
                 Children = {
                     map,
-                    buttons
+                   delPins,
+                   CheckDistance
                 }
             };
         }

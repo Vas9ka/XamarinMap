@@ -17,9 +17,7 @@ namespace XamMap
             {
                 Children =
                 {
-                    new MapsPage(),
-                    new PinPage(),
-                    new MapsApi()
+                    new PinPage()
 
                 }
             };

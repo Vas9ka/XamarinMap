@@ -1,0 +1,181 @@
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic|Playfair+Display+SC:400,700&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,700,400italic,700italic&subset=latin,cyrillic);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab|PT+Sans+Caption&subset=latin,cyrillic);
+
+header{
+position: absolute;
+height: 167px;
+left: 0px;
+top: -1.5px;
+width: 100%;
+background: #64ac8f;
+}
+
+body {
+    
+    font-size: 16px;
+    max-width: 100%;
+  }
+.image1{
+    position: absolute;
+width: 173px;
+height: 164px;
+left: 0px;
+top: 0px;
+
+background: url(image.png);
+}
+.text1{
+    position: relative;
+    top:10px;
+    font-family: 'Roboto Slab', serif;
+}
+div{
+    position: absolute;
+    left: 175px;
+    top:0px;
+    font-size: 20px;
+}
+
+address{
+    background:#94d6ba;
+    position: absolute;
+    width: 100%;
+    top:164px;
+    height:121px;
+    left: 0px;
+    color: #FFFFFF;
+    font-family: 'Roboto Slab', serif;
+    
+}
+main{
+    position: absolute;
+    font-family: 'Roboto Slab', serif;
+    top:264px;
+    background: #c0dfc2;
+    left: 0px;
+}
+
+dt{
+    margin-left: 5px;
+}
+.article2{
+    font-family: 'Playfair Display SC', serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    left: 0px;
+    top:0px;
+    position: relative;
+    background: #4b6154;
+    color: #FFFFFF;
+    font-style: italic;
+    text-align: center;
+}
+
+dt{
+    font-weight: bold;
+}
+a{
+    color: #4b6154;
+}
+.interests{
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+.interests li {
+    border-style: solid;
+    border-color: #4b6154;
+    border-radius: 5px;
+    background-color:#94d6ba ;
+    padding: 10px;
+}
+.skills{
+    display: flex;
+    justify-content: center;
+
+}
+.skills dt{
+    position: relative;
+    align-self: auto;
+    border-style: solid;
+    border-color: #4b6154;
+    border-radius: 5px;
+    background-color:#94d6ba ;
+    padding: 3px;
+}
+.skills dd{
+    position: relative;
+    border-color: #4b6154;
+    border-radius: 5px;
+    margin-left: 10px;
+    border-left: 0;
+    font-style: italic;
+}
+aside{
+    position: absolute;
+    bottom: -20px;
+    right:  -945px;
+    
+}
+.info{
+    display: flex;
+    justify-content: space-evenly ;
+    list-style-type: none;
+}
+.info li {
+    margin-top: 20px;
+    border-style: solid;
+    border-color: #4b6154;
+    border-radius: 25px;
+    background-color:#4b6154 ;
+    padding: 10px;
+    color: white;
+    font-weight: 100;
+}
+ul{
+    font-weight: bold;
+    color: #000000 ;
+    
+}
+html,body{overflow-x: hidden;}
+h3{
+    text-align: center;
+}
+h4{
+    text-align: center;
+}
+time{
+    text-align: center;
+}
+.education{
+    position: relative;
+    top: 10px;
+    border-style: solid;
+    border-color: #4b6154;
+    border-radius: 230px;
+    background-color:#64ac8f ;
+    padding: -100px;
+
+}
+.imagetel{
+    position: relative;
+width: 100px;
+height: 100px;
+left: 3px;
+top: 2px;
+float: left;
+margin-right: 10px;
+background: url(tel3.png);
+}
+.imagexam{
+    position: relative;
+width: 100px;
+height: 100px;
+left: 3px;
+top: 2px;
+float: left;
+margin-right: 10px;
+background: url(xam.png);
+}
